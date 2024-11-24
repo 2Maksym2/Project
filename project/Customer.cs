@@ -17,7 +17,7 @@ namespace project
             Age = age;
         }
 
-        public string BuyTicket()
+        public string BuyTicket(Customer customer)
         {
             throw new NotImplementedException();
         }
