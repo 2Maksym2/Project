@@ -10,6 +10,7 @@ __ПОСТАНОВКА ЗАДАЧІ__
 -	додати оформлений за допомогою markdown-розмітки опис предметної області (використовуйте заголовки, списки, рисунки та ін.);
 -	вставити розроблену діаграму класів.
  
+
 __ВИКОНАННЯ РОБОТИ__
 
 __Опис класу__
@@ -53,6 +54,7 @@ __ДОДАТОК__
 Лістинг
 
 Вміст консольного додатку (Cinema.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +78,7 @@ namespace project
     } 
 }
 Вміст консольного додатку (Hall.cs):
+
 using System;
 using System.Buffers;
 using System.Collections.Generic;
@@ -110,6 +113,7 @@ namespace project
 }
 
 Вміст консольного додатку (Customer.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,6 +146,7 @@ namespace project
 }
 
 Вміст консольного додатку (Cashier.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,6 +169,7 @@ namespace project
 }
 
 Вміст консольного додатку (Movie.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -198,6 +204,7 @@ namespace project
 }
 
 Вміст консольного додатку (FilmType.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -223,6 +230,7 @@ namespace project
 }
 
 Вміст консольного додатку (Ticket.cs):
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -250,6 +258,7 @@ namespace project
     }
 }
 Вміст консольного додатку (UnitTest.cs):
+
 using project;
 
 namespace TestProject
