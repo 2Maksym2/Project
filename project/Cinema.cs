@@ -8,15 +8,19 @@ namespace project
 {
     public class Cinema
     {
-        public List<Cashier> Cashiers { get; } = new List<Cashier>();
-        public List<Hall> Halls { get; } = new List<Hall>();
+        public List<Hall> Halls { get; set; } = new List<Hall>(); 
+        public List<Movie> Movies { get; set; } = new List<Movie>();
         public Cinema()
         {
-            Halls = new List<Hall>
-        {
-            new Hall (1,100),
-            new Hall (1,120),
-        };
+            Hall hall1 = new Hall(1, 60); 
+            Hall hall2 = new Hall(2, 80); 
+            Halls.Add(hall1);
+            Halls.Add(hall2);
         }
+        public void AddMovie(Movie movie)
+        {
+            throw new NotImplementedException();
+        }
+
     } 
 }

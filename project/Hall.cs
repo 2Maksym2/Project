@@ -9,24 +9,24 @@ namespace project
 {
     public class Hall : IPrintable
     {
-        public int HallId { get; set; }
-        public int Capacity { get; set; }
-        public DateTime MovieDate { get; set; }
+        public int HallId { get; set; } 
+        public int Capacity { get; set; } 
+        public List<Session> Sessions { get; set; } = new List<Session>();
 
         public Hall(int hallId, int capacity)
         {
             HallId = hallId;
             Capacity = capacity;
         }
+        public void AddSession(Session session)
+        {
+            throw new NotImplementedException();
 
+        }
         public void PrintDetails()
         {
             throw new NotImplementedException();
         }
 
-        public List<int> AvailableSeats(int HallId, DateTime movieDate, int capacity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

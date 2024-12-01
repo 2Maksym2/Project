@@ -8,21 +8,19 @@ namespace project
 {
     public class Customer
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Name { get; set; } 
 
-        public Customer(string name, int age)
+        public Customer(string name)
         {
             Name = name;
-            Age = age;
         }
 
-        public string BuyTicket(Customer customer)
+        public TicketSingle BuySingleTicket(Session session, int seatNumber)
         {
             throw new NotImplementedException();
         }
 
-        public bool CanWatchMovie(Movie movie)
+        public TicketGroup BuyMultipleTickets(Session session, List<int> seatNumbers)
         {
             throw new NotImplementedException();
         }
