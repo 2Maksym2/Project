@@ -12,7 +12,7 @@ namespace project
         public Hall Hall { get; set; }
         public DateTime MovieDate { get; set; }
         public double TicketPrice { get; set; }
-        public List<int> AvailableSeatNumbers { get; set; }
+        public List<int> AvailableSeats { get; set; }
 
         public Session(Movie movie, Hall hall, DateTime movieDate, double ticketPrice)
         {
@@ -21,10 +21,10 @@ namespace project
             MovieDate = movieDate;
             TicketPrice = ticketPrice;
 
-            AvailableSeatNumbers = new List<int>();
+            AvailableSeats = new List<int>();
             for (int i = 1; i <= hall.Capacity; i++)
             {
-                AvailableSeatNumbers.Add(i);
+                AvailableSeats.Add(i);
             }
         }
 

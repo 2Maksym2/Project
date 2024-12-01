@@ -6,66 +6,83 @@ namespace TestProject
     public class MovieTests
     {
         [TestMethod]
-        public void AddMovie_AddMovieToFilmsList()
+        public void AddMovie_AddMovieToList()
         {
             // Arrange
-            int expected = 1;
-            var movie1 = new Movie(FilmType.Action, "Action Movie", 120, 18, 10.99);
-            var newMovie = new Movie(FilmType.Comedy, "Comedy Movie", 90, 12, 8.99);
-            var expected1 = newMovie;
+            var cinema = new Cinema();
+            var movie = new Movie("Funny Movie", FilmType.Comedy, 90);
+            int expectedMovieCount = 1;
+
             // Act
-            movie1.AddMovie(newMovie);
+            cinema.AddMovie(movie);
 
             // Assert
-            Assert.AreEqual(expected, movie1.Films.Count);
-            Assert.AreEqual(expected1, movie1.Films[0]);
+            Assert.AreEqual(expectedMovieCount, cinema.Movies.Count);
         }
     }
 
     [TestClass]
-    public class CustomerTests
+    public class HallTests
     {
         [TestMethod]
-        public void CanWatchMovie_ShouldReturnTrue()
+        public void AddSession_ShouldAddSessionToList()
         {
             // Arrange
-            var movie = new Movie(FilmType.Drama, "Drama Film", 150, 18, 12.99);
-            var customer = new Customer("Alice", 20);
+            var cinema = new Cinema();
+            var hall = new Hall(1, 50);
+            var movie = new Movie("Action Movie", FilmType.Action, 120);
+            var session = new Session(movie, hall, DateTime.Now, 150);
+            int expectedCount = 1;
 
             // Act
-            var result = customer.CanWatchMovie(movie);
+            cinema.AddSession(session);
 
             // Assert
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void CanWatchMovie_ShouldReturnFalse()
-        {
-            // Arrange
-            var movie = new Movie(FilmType.Horror, "Scary Movie", 100, 16, 9.99);
-            var customer = new Customer("Bob", 14);
-
-            // Act
-            var result = customer.CanWatchMovie(movie);
-
-            // Assert
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void BuyTicketTest()
-        {
-            // Arrange
-            var customer = new Customer("Charlie", 25);
-            var movie = new Movie(FilmType.Adventure, "Exciting Film", 130, 12, 11.50);
-
-            // Act
-            var ticket = customer.BuyTicket(customer);
-
-            // Assert
-            Assert.IsTrue(ticket.Contains(customer.Name));
-            Assert.IsTrue(ticket.Contains(movie.Title));
+            Assert.AreEqual(expectedCount, cinema.Sessions.Count);
         }
     }
+    [TestClass]
+    public class TicketSingleTests
+    {
+        public void BuySingleTicket_ReduceAvailableSeats()
+        {
+            // Arrange
+            var hall = new Hall(1, 50);
+            var movie = new Movie("Drama Movie", FilmType.Drama, 150);
+            var session = new Session(movie, hall, DateTime.Now, 15);
+            int seatNumber = 5;
+            int expectedAvailableSeats = hall.Capacity - 1;
+
+            // Act
+            var ticket = session.BuySingleTicket(seatNumber);
+
+            // Assert
+            Assert.AreEqual(expectedAvailableSeats, session.AvailableSeats.Count);
+            Assert.IsFalse(session.AvailableSeats.Contains(seatNumber));
+        }
+    }
+    [TestClass]
+    public class TicketGroupTests
+    {
+        public void BuyGroupTicket_ReduceAvailableSeats()
+        {
+            // Arrange
+            var hall = new Hall(1, 50);
+            var movie = new Movie("Adventure Movie", FilmType.Adventure, 140);
+            var session = new Session(movie, hall, DateTime.Now, 20);
+            var seatNumbers = new List<int> { 1, 2, 3 };
+            int expectedAvailableSeats = hall.Capacity - seatNumbers.Count;
+
+            // Act
+            var ticket = session.BuyMultipleTickets(seatNumbers);
+
+            // Assert
+            Assert.AreEqual(expectedAvailableSeats, session.AvailableSeats.Count);
+            foreach (var seat in seatNumbers)
+            {
+                Assert.IsFalse(session.AvailableSeats.Contains(seat));
+            }
+        }
+    }
+
 }
