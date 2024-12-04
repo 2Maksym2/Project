@@ -17,12 +17,17 @@ namespace project
 
         public TicketSingle BuySingleTicket(Session session, int seatNumber)
         {
-            throw new NotImplementedException();
+           if (!session.AvailableSeats.Contains(seatNumber))
+                throw new Exception($"Seat {seatNumber} is not available.");
+
+            session.AvailableSeats.Remove(seatNumber);
+            return new TicketSingle(seatNumber, session.TicketPrice);
         }
 
-        public TicketGroup BuyMultipleTickets(Session session, List<int> seatNumbers)
+        public TicketGroup BuyGroupTickets(Session session, List<int> seatNumbers)
         {
-            throw new NotImplementedException();
+            session.ReserveSeats(seatNumbers);
+            return new TicketGroup(seatNumbers, session.TicketPrice);
         }
     }
 }

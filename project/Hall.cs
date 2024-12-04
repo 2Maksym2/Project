@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    public class Hall : IPrintable
+    public class Hall : IPrintable, IComparable<Hall>
     {
         public int HallId { get; set; } 
         public int Capacity { get; set; } 
@@ -20,13 +20,37 @@ namespace project
         }
         public void AddSession(Session session)
         {
-            throw new NotImplementedException();
-
+            Sessions.Add(session);
         }
         public void PrintDetails()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Hall {HallId} Capacity {Capacity}");
+        Console.WriteLine("Sessions:");
+
+        foreach (var session in Sessions)
+        {
+            Console.WriteLine($"Movie: {session.SMovie.Title}, Time: {session.MovieDate}");
+            Console.WriteLine($"Available Seats:");
+
+            var seats = session.AvailableSeats;
+            for (int i = 0; i < seats.Count; i++)
+            {
+                Console.Write(seats[i] + "\t");
+
+                if ((i + 1) % 5 == 0)
+                {
+                    Console.WriteLine();
+                }
+            }
+
+            Console.WriteLine(); 
+        }
         }
 
+        public int CompareTo(Hall? obj)
+       {
+           if (obj == null) return 1;
+           return Capacity.CompareTo(obj.Capacity);
+       }
     }
 }

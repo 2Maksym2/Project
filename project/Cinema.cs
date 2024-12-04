@@ -16,10 +16,11 @@ namespace project
             Hall hall2 = new Hall(2, 80); 
             Halls.Add(hall1);
             Halls.Add(hall2);
+            Halls.Sort();
         }
         public void AddMovie(Movie movie)
         {
-            throw new NotImplementedException();
+            Movies.Add(movie);
         }
 
     } 
