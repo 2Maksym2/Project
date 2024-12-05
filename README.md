@@ -1129,7 +1129,7 @@ namespace project
                    Console.WriteLine("Session added successfully.");
                }
               
-        static void BuyTicket(Cinema cinema)
+static void BuyTicket(Cinema cinema)
                {
                    List<Session> allSessions = new List<Session>();
                    foreach (var hall in cinema.Halls)
@@ -1156,7 +1156,7 @@ do
                            for (int i = 0; i < allSessions.Count; i++)
                            {
                                Console.WriteLine(
-                                   $"\n{i + 1}. {allSessions[i].SMovie.Title}, " +
+                                   $"{i + 1}. {allSessions[i].SMovie.Title}, " +
                                    $"Time: {allSessions[i].MovieDate}");
                                var seats = allSessions[i].AvailableSeats;
                                for (int j = 0; j < seats.Count; j++)
