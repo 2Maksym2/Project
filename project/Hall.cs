@@ -22,29 +22,32 @@ namespace project
         {
             Sessions.Add(session);
         }
-        public void PrintDetails()
+        public string PrintDetails()
         {
-            Console.WriteLine($"Hall {HallId} Capacity {Capacity}");
-        Console.WriteLine("Sessions:");
+            string str = "";
+            str += $"\nHall {HallId} Capacity {Capacity}";
+            str += "\nSessions:";
 
-        foreach (var session in Sessions)
-        {
-            Console.WriteLine($"Movie: {session.SMovie.Title}, Time: {session.MovieDate}");
-            Console.WriteLine($"Available Seats:");
-
-            var seats = session.AvailableSeats;
-            for (int i = 0; i < seats.Count; i++)
+            foreach (var session in Sessions)
             {
-                Console.Write(seats[i] + "\t");
+                str +=  $"\nMovie: {session.SMovie.Title}, Time: {session.MovieDate}";
+                str += $"\nAvailable Seats:";
+                str += "\n";
 
-                if ((i + 1) % 5 == 0)
+                var seats = session.AvailableSeats;
+                for (int i = 0; i < seats.Count; i++)
                 {
-                    Console.WriteLine();
-                }
-            }
+                    str += seats[i] + "\t";
 
-            Console.WriteLine(); 
-        }
+                    if ((i + 1) % 5 == 0)
+                    {
+                        str += "\n";
+                    }
+                }
+
+                str += "\n";
+            }
+            return str;
         }
 
         public int CompareTo(Hall? obj)

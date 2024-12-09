@@ -8,6 +8,9 @@ namespace project
 {
     public class Customer
     {
+        public delegate void TicketOperation(string message);
+        public event TicketOperation TicketPurchased;
+
         public string Name { get; set; } 
 
         public Customer(string name)
@@ -21,13 +24,16 @@ namespace project
                 throw new Exception($"Seat {seatNumber} is not available.");
 
             session.AvailableSeats.Remove(seatNumber);
+            TicketPurchased?.Invoke("Thank you for purchasing the ticket.");
             return new TicketSingle(seatNumber, session.TicketPrice);
         }
 
         public TicketGroup BuyGroupTickets(Session session, List<int> seatNumbers)
         {
             session.ReserveSeats(seatNumbers);
+            TicketPurchased?.Invoke("Thank you for purchasing the ticket.");
             return new TicketGroup(seatNumbers, session.TicketPrice);
         }
+       
     }
 }

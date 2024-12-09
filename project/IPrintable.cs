@@ -8,6 +8,6 @@ namespace project
 {
     public interface IPrintable
     {
-        void PrintDetails();
+        string PrintDetails();
     }
 }

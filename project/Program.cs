@@ -9,7 +9,7 @@ namespace project
         {
            Cinema cinema = new Cinema();
             bool running = true;
-
+            cinema.MovieAdded += DisplayMessage;
             do
             {
                 try
@@ -48,7 +48,7 @@ namespace project
                             break;
 
                         case "5":
-                            PrintMovieLibrary(cinema);
+                            PrintMovieLibrary(cinema, IsLongMovie, DisplayMessage);
                             break;
 
                         case "6":
@@ -67,7 +67,7 @@ namespace project
             } while (running);
         }
 
-               static void AddMovie(Cinema cinema)
+        static void AddMovie(Cinema cinema)
                {
                    string title;
                    do
@@ -138,10 +138,9 @@ namespace project
 
                    Movie movie = new Movie(title, genre, duration);
                    cinema.AddMovie(movie);
-                   Console.WriteLine("\nMovie added successfully.");
                }
 
-               static void AddSession(Cinema cinema)
+        static void AddSession(Cinema cinema)
                {
                    if (cinema.Movies.Count == 0)
                    {
@@ -254,7 +253,6 @@ namespace project
                      }
             Session session = new Session(movie, sessionDateTime, price, availableSeats);
                    hall.AddSession(session);
-                   Console.WriteLine("Session added successfully.");
                }
               
         static void BuyTicket(Cinema cinema)
@@ -344,6 +342,8 @@ namespace project
                                    Console.WriteLine($"Error: {ex.Message}");
                                }
                            } while (true);
+
+                           cinemacustomer.TicketPurchased += DisplayMessage;
                            Console.Write("Do you want to buy a single ticket or a group ticket? (1/2): ");
                            string ticketType = Console.ReadLine()?.Trim().ToLower();
 
@@ -446,15 +446,17 @@ namespace project
                    } while (true);
                }
 
-               static void PrintAvailableSessions(Cinema cinema)
+        static void PrintAvailableSessions(Cinema cinema)
                {
+            string mes = "";
                    foreach (var hall in cinema.Halls)
                    {
-                       hall.PrintDetails();
+                      mes += hall.PrintDetails();
                    }
+            Console.WriteLine(mes);
                }
 
-               static void PrintMovieLibrary(Cinema cinema)
+        static void PrintMovieLibrary(Cinema cinema, Predicate<Movie> longmovie, Action<string> message)
                {
                    Console.WriteLine("\nMovie Library:");
                    if (cinema.Movies.Count == 0)
@@ -463,11 +465,30 @@ namespace project
                        return;
                    }
 
-                   for (int i = 0; i < cinema.Movies.Count; i++)
-                   {
-                       var movie = cinema.Movies[i];
-                       Console.WriteLine($"{i + 1}. {movie.Title} - Genre: {movie.Genre}, Duration: {movie.Duration} minutes");
-                   }
-               }
+                    message.Invoke("\nMovies shorter than 2 hours:");
+                    foreach (var movie in cinema.Movies)
+                    {
+                        if (!longmovie.Invoke(movie))
+                        {
+                           message.Invoke($"- {movie.Title} ({movie.Duration} minutes)");
+                        }
+                    }
+                     message.Invoke("\nMovies longer than 2 hours:");
+                    foreach (var movie in cinema.Movies)
+                    {
+                         if (longmovie.Invoke(movie))
+                         {
+                           message.Invoke($"- {movie.Title} ({movie.Duration} minutes)");
+                         }
+                    }
+        }
+        static void DisplayMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+        static bool IsLongMovie(Movie movie)
+        {
+            return movie.Duration > 120;
+        }
     }
 }

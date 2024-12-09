@@ -8,6 +8,8 @@ namespace project
 {
     public class Cinema
     {
+        public delegate void MovieAddedHandler(string message);
+        public event MovieAddedHandler MovieAdded;
         public List<Hall> Halls { get; set; } = new List<Hall>(); 
         public List<Movie> Movies { get; set; } = new List<Movie>();
         public Cinema()
@@ -21,6 +23,7 @@ namespace project
         public void AddMovie(Movie movie)
         {
             Movies.Add(movie);
+            MovieAdded?.Invoke($"Film '{movie.Title}' successfully added.");
         }
 
     } 
