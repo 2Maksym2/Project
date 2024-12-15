@@ -1590,7 +1590,6 @@ namespace project
             Movies.Add(movie);
             MovieAdded?.Invoke($"Film '{movie.Title}' successfully added.");
         }
-
    } 
 }
 
@@ -1620,10 +1619,8 @@ namespace project
             SMovie = movie;
             MovieDate = movieDate;
             TicketPrice = ticketPrice;
-
  AvailableSeats = availableSeats;
-            }
-
+}
 public bool IsSessionFull()
         {
            return AvailableSeats.Count == 0;
@@ -1906,7 +1903,7 @@ namespace project
     }
 }
 
-Вміст консольного додатку (Program.cs):
+Вміст консольного додатку (**__Program.cs__**):
 
 using System;
 
@@ -2164,7 +2161,7 @@ do
             Session session = new Session(movie, sessionDateTime, price, availableSeats);
                    hall.AddSession(session);
                }
-        static void BuyTicket(Cinema cinema)
+               static void BuyTicket(Cinema cinema)
                {
                    List<Session> allSessions = new List<Session>();
                    foreach (var hall in cinema.Halls)
@@ -2174,16 +2171,13 @@ do
                            allSessions.Add(session);
                        }
                    }
-
- if (allSessions.Count == 0)
+                   if (allSessions.Count == 0)
                    {
                        Console.WriteLine("No sessions available to buy tickets.");
                        return;
                    }
-
-Session selectedSession;
-
- do
+                   Session selectedSession;
+                   do
                    {
                        try
                        {
@@ -2197,31 +2191,24 @@ Session selectedSession;
                                for (int j = 0; j < seats.Count; j++)
                                {
                                    Console.Write(seats[j] + "\t");
-
-   if ((j + 1) % 5 == 0)
+                                   if ((j + 1) % 5 == 0)
                                    {
                                        Console.WriteLine();
                                    }
                                }
-
-   Console.WriteLine();
+                               Console.WriteLine();
                            }
-
-
-
-   string sessionInput = Console.ReadLine();
+                           string sessionInput = Console.ReadLine();
                            if (string.IsNullOrWhiteSpace(sessionInput))
                                throw new Exception("Session selection cannot be empty.");
                            if (!int.TryParse(sessionInput, out int sessionIndex) || sessionIndex < 1 || sessionIndex > allSessions.Count)
                                throw new Exception("Invalid session choice.");
-
- selectedSession = allSessions[sessionIndex - 1];
-
-  if (selectedSession.IsSessionFull())
+                           selectedSession = allSessions[sessionIndex - 1];
+                           if (selectedSession.IsSessionFull())
                                throw new Exception("No available seats for the selected session.");
-    break;
+                           break;
                        }
-  catch (Exception ex)
+                       catch (Exception ex)
                        {
                            Console.WriteLine($"Error: {ex.Message}");
                        }
