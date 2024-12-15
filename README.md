@@ -1527,27 +1527,49 @@ __Опис предметної області: кінотеатр__
 
 __Діаграма класів__
  
+  ![Діаграма класів](https://github.com/2Maksym2/Project/blob/main/Pictures/16.jpg)
+ 
 Рисунок 1 – Діаграма класів
 
 
 __Результати запуску unit-тестів__
  
+ 
+  ![Результат запуску unit-тестів](https://github.com/2Maksym2/Project/blob/main/Pictures/6.jpg)
+  
+  
+  
 Рисунок 2 – Результат запуску unit-тестів
 
 
 __Результати функціонального тестування__
  
+![Результат запуску unit-тестів](https://github.com/2Maksym2/Project/blob/main/Pictures/9.jpg)
+
 Рисунок 3 – Результат функціонального тестування №1 некоректний вибір в меню
  
+![Результат функціонального тестування №2 ](https://github.com/2Maksym2/Project/blob/main/Pictures/10.jpg)
+
 Рисунок 4 – Результат функціонального тестування №2 
+
+![Результат функціонального тестування №3 додавання фільму до фільмотеки](https://github.com/2Maksym2/Project/blob/main/Pictures/19.jpg)
+
 Рисунок 5 – Результат функціонального тестування №3 додавання фільму до фільмотеки
  
+![Результат функціонального тестування №4 додавання сеансу до зали](https://github.com/2Maksym2/Project/blob/main/Pictures/12.jpg)
+
 Рисунок 6 – Результат функціонального тестування №4 додавання сеансу до зали
  
+![Результат функціонального тестування №5 покупка білету на одного](https://github.com/2Maksym2/Project/blob/main/Pictures/18.jpg)
+
 Рисунок 7 – Результат функціонального тестування №5 покупка білету на одного
  
+![Результат функціонального тестування №6 покупка групового білету](https://github.com/2Maksym2/Project/blob/main/Pictures/17.jpg)
+
 Рисунок 8 – Результат функціонального тестування №6 покупка групового білету
  
+![Результат функціонального тестування №7](https://github.com/2Maksym2/Project/blob/main/Pictures/15.jpg)
+
 Рисунок 9 – Результат функціонального тестування №7
 
 
@@ -2184,9 +2206,7 @@ do
                            Console.WriteLine("Choose a session:");
                            for (int i = 0; i < allSessions.Count; i++)
                            {
-                               Console.WriteLine(
-                                   $"\n{i + 1}. {allSessions[i].SMovie.Title}, " +
-                                   $"Time: {allSessions[i].MovieDate}");
+Console.WriteLine($"\n{i + 1}. {allSessions[i].SMovie.Title}, " + $"Time: {allSessions[i].MovieDate}");
                                var seats = allSessions[i].AvailableSeats;
                                for (int j = 0; j < seats.Count; j++)
                                {
@@ -2261,7 +2281,7 @@ do
                                    }
                                } while (true);
                                var ticket = cinemacustomer.BuySingleTicket(selectedSession, seatNumber);
-                               Console.WriteLine($"{ticket.SuccessfulPurchase()} for seat {seatNumber}.");
+ Console.WriteLine($"{ticket.SuccessfulPurchase()} for seat {seatNumber}.");
                                Console.WriteLine($"Ticket price: {ticket.TicketPrice}.");
                            }
                               else if (ticketType == "2")
@@ -2318,7 +2338,7 @@ do
                        }
                        catch (Exception ex)
                        {
-                           Console.WriteLine($"Error: {ex.Message}");
+ Console.WriteLine($"Error: {ex.Message}");
                        }
                    } while (true);
                }
